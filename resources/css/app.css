@@ -1,0 +1,52 @@
+@import '@fontsource/jost/300.css';
+@import '@fontsource/jost/400.css';
+@import '@fontsource/jost/500.css';
+@import '@fontsource/jost/600.css';
+@import '@fontsource/jost/700.css';
+@import '@fontsource/dm-serif-display/400.css';
+@import '@fontsource/dm-serif-display/400-italic.css';
+
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+[x-cloak] { display: none !important; }
+
+@theme {
+    --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'DM Serif Display', ui-serif, Georgia, serif;
+
+    /* Brand Colors */
+    --color-crimson: #8B0000;
+    --color-crimson-light: #A52020;
+    --color-gold: #C9A84C;
+    --color-gold-light: #E2C27A;
+    --color-gold-dim: #8a6f30;
+
+    /* Dark surfaces */
+    --color-dark: #111111;
+    --color-dark-2: #1A1A1A;
+    --color-surface: #1E1A17;
+    --color-muted: #6B6560;
+
+    /* Light surfaces */
+    --color-light: #F5F0E8;
+    --color-warm-white: #FAFAF9;
+
+    /* Admin - Light mode */
+    --color-admin-bg: #F8F7F4;
+    --color-admin-surface: #FFFFFF;
+    --color-admin-border: #E8E4DC;
+    --color-admin-text: #1A1A1A;
+    --color-admin-muted: #6B6560;
+
+    /* Admin - Dark mode */
+    --color-admin-dark-bg: #0F0F0F;
+    --color-admin-dark-surface: #1A1A1A;
+    --color-admin-dark-border: #2A2A2A;
+    --color-admin-dark-text: #FAFAF9;
+    --color-admin-dark-muted: #6B6560;
+}

@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'DM Serif Display', ui-serif, Georgia, serif;
+    --color-crimson: #8B0000;
+    --color-crimson-light: #A52020;
+    --color-gold: #C9A84C;
+    --color-gold-light: #E2C27A;
+}
+
+@import '@fontsource/jost/400.css';
+@import '@fontsource/jost/500.css';
+@import '@fontsource/jost/600.css';
+@import '@fontsource/dm-serif-display/400.css';
+
+/* Prevent flashing before Alpine initializes */
+[x-cloak] {
+    display: none !important;
+}
