@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="antialiased" style="background: #0D0D0D; color: #FAFAF9; font-family: 'Jost', sans-serif;">
+<body class="antialiased" style="background: #0D0D0D; color: #FAFAF9; font-family: 'Spline Sans', sans-serif;">
 
     @include('partials.header')
 

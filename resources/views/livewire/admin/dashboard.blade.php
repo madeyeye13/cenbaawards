@@ -4,11 +4,11 @@
         <div class="mb-8 p-6 rounded-2xl text-white relative overflow-hidden"
              style="background: #8B0000;">
             <div class="absolute inset-0 opacity-10"
-                 style="background-image: radial-gradient(circle, #C9A84C 1px, transparent 1px); background-size: 24px 24px;">
+                 style="background-image: radial-gradient(circle, #FBA320 1px, transparent 1px); background-size: 24px 24px;">
             </div>
             <div class="relative z-10">
                 <p class="text-sm mb-1" style="color: rgba(255,255,255,0.7);">Welcome back,</p>
-                <h2 class="text-2xl font-semibold" style="font-family: 'DM Serif Display', serif;">
+                <h2 class="text-2xl font-semibold" style="font-family: 'Fraunces', serif;">
                     {{ auth('admin')->user()->name }} 👋
                 </h2>
                 <p class="text-sm mt-1" style="color: rgba(255,255,255,0.6);">
@@ -23,7 +23,7 @@
             @php
                 $stats = [
                     ['label' => 'Blog Posts', 'value' => \App\Models\Post::count(), 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z', 'color' => '#3B82F6'],
-                    ['label' => 'Winners', 'value' => \App\Models\Winner::count(), 'icon' => 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z', 'color' => '#C9A84C'],
+                    ['label' => 'Winners', 'value' => \App\Models\Winner::count(), 'icon' => 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z', 'color' => '#FBA320'],
                     ['label' => 'Gallery Items', 'value' => \App\Models\Gallery::count(), 'icon' => 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z', 'color' => '#10B981'],
                     ['label' => 'Contacts', 'value' => \App\Models\Contact::where('is_read', false)->count(), 'icon' => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', 'color' => '#EF4444', 'suffix' => 'unread'],
                 ];
@@ -59,7 +59,7 @@
     $stats = [
         ['label' => 'Blog Posts', 'value' => $postCount, 'color' => '#3B82F6',
          'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
-        ['label' => 'Winners', 'value' => $winnerCount, 'color' => '#C9A84C',
+        ['label' => 'Winners', 'value' => $winnerCount, 'color' => '#FBA320',
          'icon' => 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'],
         ['label' => 'Gallery Items', 'value' => $galleryCount, 'color' => '#10B981',
          'icon' => 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'],

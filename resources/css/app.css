@@ -1,10 +1,15 @@
-@import '@fontsource/jost/300.css';
-@import '@fontsource/jost/400.css';
-@import '@fontsource/jost/500.css';
-@import '@fontsource/jost/600.css';
-@import '@fontsource/jost/700.css';
-@import '@fontsource/dm-serif-display/400.css';
-@import '@fontsource/dm-serif-display/400-italic.css';
+@import '@fontsource/spline-sans/300.css';
+@import '@fontsource/spline-sans/400.css';
+@import '@fontsource/spline-sans/500.css';
+@import '@fontsource/spline-sans/600.css';
+@import '@fontsource/spline-sans/700.css';
+@import '@fontsource/fraunces/300.css';
+@import '@fontsource/fraunces/400.css';
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/700.css';
+@import '@fontsource/fraunces/400-italic.css';
+@import '@fontsource/fraunces/500-italic.css';
 
 @import 'tailwindcss';
 
@@ -16,14 +21,14 @@
 [x-cloak] { display: none !important; }
 
 @theme {
-    --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
-    --font-serif: 'DM Serif Display', ui-serif, Georgia, serif;
+    --font-sans: 'Spline Sans', ui-sans-serif, system-ui, sans-serif;
+   --font-serif: 'Fraunces', ui-serif, Georgia, serif;
 
     /* Brand Colors */
     --color-crimson: #8B0000;
     --color-crimson-light: #A52020;
-    --color-gold: #C9A84C;
-    --color-gold-light: #E2C27A;
+    --color-gold: #FBA320;
+    --color-gold-light: #FCB94D;
     --color-gold-dim: #8a6f30;
 
     /* Dark surfaces */
@@ -49,4 +54,8 @@
     --color-admin-dark-border: #2A2A2A;
     --color-admin-dark-text: #FAFAF9;
     --color-admin-dark-muted: #6B6560;
+
+    --color-cream: #F5F0E8;
+    --color-cream-dark: #E8E0D0;
+    --color-ink: #111111;
 }

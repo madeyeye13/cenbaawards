@@ -24,8 +24,8 @@ class Category extends Model
             ->saveSlugsTo('slug');
     }
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
+{
+    return $this->hasMany(Post::class);
+}
 }

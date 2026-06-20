@@ -23,17 +23,9 @@ Route::get('/winners', function () {
 
 // Award Routes
 Route::prefix('award')->name('award.')->group(function () {
-    Route::get('/categories', function () {
-        return view('award.categories');
-    })->name('categories');
-
-    Route::get('/criteria', function () {
-        return view('award.criteria');
-    })->name('criteria');
-
-    Route::get('/judges', function () {
-        return view('award.judges');
-    })->name('judges');
+    Route::get('/categories', \App\Livewire\Pages\AwardCategories::class)->name('categories');
+    Route::get('/criteria', \App\Livewire\Pages\AwardCriteria::class)->name('criteria');
+    Route::get('/judges', \App\Livewire\Pages\Judges::class)->name('judges');
 });
 
 // Blog Routes
@@ -82,20 +74,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
        Route::get('/', \App\Livewire\Admin\Dashboard::class)->name('dashboard');
 
         // Media Library
-        Route::get('/media', function () {
-            return view('admin.media.index');
-        })->name('media.index');
+        Route::get('/media', \App\Livewire\Admin\MediaLibrary::class)->name('media.index');
 
-        // Posts
-        Route::get('/posts', function () {
-            return view('admin.posts.index');
-        })->name('posts.index');
-        Route::get('/posts/create', function () {
-            return view('admin.posts.create');
-        })->name('posts.create');
-        Route::get('/posts/{id}/edit', function ($id) {
-            return view('admin.posts.edit', compact('id'));
-        })->name('posts.edit');
+        // Posts (Blog + Press Release)
+Route::get('/posts', \App\Livewire\Admin\Posts::class)->name('posts.index');
+Route::get('/posts/create', \App\Livewire\Admin\PostEditor::class)->name('posts.create');
+Route::get('/posts/{post}/edit', \App\Livewire\Admin\PostEditor::class)->name('posts.edit');
 
         // Award Categories
         Route::get('/award-categories', function () {
@@ -108,9 +92,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         })->name('award-criteria.index');
 
         // Judges
-        Route::get('/judges', function () {
-            return view('admin.judges.index');
-        })->name('judges.index');
+        Route::get('/judges', \App\Livewire\Admin\Judges::class)->name('judges.index');
 
         // Winners
         Route::get('/winners', function () {

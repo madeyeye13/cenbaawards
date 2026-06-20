@@ -6,21 +6,21 @@
 
         {{-- Pattern overlay --}}
         <div class="absolute inset-0 opacity-10"
-             style="background-image: radial-gradient(circle, #C9A84C 1px, transparent 1px);
+             style="background-image: radial-gradient(circle, #FBA320 1px, transparent 1px);
                     background-size: 32px 32px;">
         </div>
 
         {{-- Gold accent line --}}
         <div class="absolute top-0 right-0 w-1 h-full"
-             style="background: linear-gradient(to bottom, #C9A84C, transparent, #C9A84C);">
+             style="background: linear-gradient(to bottom, #FBA320, transparent, #FBA320);">
         </div>
 
         {{-- Bottom decorative circle --}}
         <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-20"
-             style="background: radial-gradient(circle, #C9A84C, transparent);">
+             style="background: radial-gradient(circle, #FBA320, transparent);">
         </div>
         <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-10"
-             style="background: radial-gradient(circle, #E2C27A, transparent);">
+             style="background: radial-gradient(circle, #FCB94D, transparent);">
         </div>
 
         {{-- Content --}}
@@ -31,10 +31,10 @@
                 <div class="flex items-center gap-3 mb-2">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center"
                          style="background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4);">
-                        <span class="text-lg" style="color: #C9A84C; font-family: 'DM Serif Display', serif;">C</span>
+                        <span class="text-lg" style="color: #FBA320; font-family: 'Fraunces', serif;">C</span>
                     </div>
                     <span class="text-white text-lg font-semibold tracking-wide"
-                          style="font-family: 'DM Serif Display', serif;">CenBa Awards</span>
+                          style="font-family: 'Fraunces', serif;">CenBa Awards</span>
                 </div>
             </div>
 
@@ -42,12 +42,12 @@
             <div>
                 <div class="mb-6">
                     <span class="text-xs font-semibold tracking-[0.3em] uppercase"
-                          style="color: #C9A84C;">Admin Portal</span>
+                          style="color: #FBA320;">Admin Portal</span>
                 </div>
                 <h1 class="text-white text-4xl xl:text-6xl 2xl:text-7xl leading-tight mb-6"
-    style="font-family: 'DM Serif Display', serif;">
+    style="font-family: 'Fraunces', serif;">
     Managing<br>
-    <em style="color: #E2C27A;">African</em><br>
+    <em style="color: #FCB94D;">African</em><br>
     Excellence
 </h1>
                 <p class="text-sm leading-relaxed"
@@ -80,16 +80,16 @@
             <div class="lg:hidden text-center mb-10">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3"
                      style="background: #8B0000;">
-                    <span class="text-white text-lg" style="font-family: 'DM Serif Display', serif;">C</span>
+                    <span class="text-white text-lg" style="font-family: 'Fraunces', serif;">C</span>
                 </div>
-                <h1 class="text-gray-900 text-2xl" style="font-family: 'DM Serif Display', serif;">CenBa Awards</h1>
+                <h1 class="text-gray-900 text-2xl" style="font-family: 'Fraunces', serif;">CenBa Awards</h1>
                 <p class="text-gray-400 text-xs mt-1 tracking-widest uppercase">Admin Portal</p>
             </div>
 
             {{-- Heading --}}
             <div class="mb-8">
                 <h2 class="text-gray-900 text-2xl lg:text-3xl font-semibold mb-2"
-                    style="font-family: 'DM Serif Display', serif;">Welcome back</h2>
+                    style="font-family: 'Fraunces', serif;">Welcome back</h2>
                 <p class="text-gray-500 text-sm">Sign in to your admin account to continue</p>
             </div>
 

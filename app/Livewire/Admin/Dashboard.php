@@ -29,7 +29,7 @@ class Dashboard extends Component
 
         $this->actions = [
             ['label' => 'New Post', 'route' => 'admin.posts.create', 'color' => '#3B82F6'],
-            ['label' => 'Add Winner', 'route' => 'admin.winners.index', 'color' => '#C9A84C'],
+            ['label' => 'Add Winner', 'route' => 'admin.winners.index', 'color' => '#FBA320'],
             ['label' => 'Upload Media', 'route' => 'admin.media.index', 'color' => '#10B981'],
             ['label' => 'Add Judge', 'route' => 'admin.judges.index', 'color' => '#8B5CF6'],
             ['label' => 'Add Partner', 'route' => 'admin.partners.index', 'color' => '#F59E0B'],

@@ -1,3 +1,16 @@
+@import '@fontsource/spline-sans/300.css';
+@import '@fontsource/spline-sans/400.css';
+@import '@fontsource/spline-sans/500.css';
+@import '@fontsource/spline-sans/600.css';
+@import '@fontsource/spline-sans/700.css';
+@import '@fontsource/fraunces/300.css';
+@import '@fontsource/fraunces/400.css';
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/700.css';
+@import '@fontsource/fraunces/400-italic.css';
+@import '@fontsource/fraunces/500-italic.css';
+
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -5,19 +18,119 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+[x-cloak] { display: none !important; }
+
 @theme {
-    --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;
-    --font-serif: 'DM Serif Display', ui-serif, Georgia, serif;
+    --font-sans: 'Spline Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: font-family: 'Fraunces', ui-serif, Georgia, serif;
+
+    /* Brand Colors */
     --color-crimson: #8B0000;
     --color-crimson-light: #A52020;
-    --color-gold: #C9A84C;
-    --color-gold-light: #E2C27A;
+    --color-gold: #FBA320;
+    --color-gold-light: #FCB94D;
+    --color-gold-dim: #8a6f30;
+
+    /* Dark surfaces */
+    --color-dark: #111111;
+    --color-dark-2: #1A1A1A;
+    --color-surface: #1E1A17;
+    --color-muted: #6B6560;
+
+    /* Light surfaces */
+    --color-light: #F5F0E8;
+    --color-warm-white: #FAFAF9;
+
+    /* Admin - Light mode */
+    --color-admin-bg: #F8F7F4;
+    --color-admin-surface: #FFFFFF;
+    --color-admin-border: #E8E4DC;
+    --color-admin-text: #1A1A1A;
+    --color-admin-muted: #6B6560;
+
+    /* Admin - Dark mode */
+    --color-admin-dark-bg: #0F0F0F;
+    --color-admin-dark-surface: #1A1A1A;
+    --color-admin-dark-border: #2A2A2A;
+    --color-admin-dark-text: #FAFAF9;
+    --color-admin-dark-muted: #6B6560;
+
+    --color-cream: #F5F0E8;
+    --color-cream-dark: #E8E0D0;
+    --color-ink: #111111;
 }
 
-@import '@fontsource/jost/400.css';
-@import '@fontsource/jost/500.css';
-@import '@fontsource/jost/600.css';
-@import '@fontsource/dm-serif-display/400.css';
+
+/* ===== CUSTOM SCROLLBAR ===== */
+aside nav {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 168, 76, 0.4) transparent;
+}
+aside nav::-webkit-scrollbar {
+    width: 6px !important;
+}
+aside nav::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+aside nav::-webkit-scrollbar-thumb {
+    background-color: rgba(201, 168, 76, 0.4) !important;
+    border-radius: 999px !important;
+}
+aside nav::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(201, 168, 76, 0.7) !important;
+}
+
+main {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 0, 0, 0.3) transparent;
+}
+main::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+main::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+main::-webkit-scrollbar-thumb {
+    background-color: rgba(139, 0, 0, 0.3) !important;
+    border-radius: 999px !important;
+}
+main::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(139, 0, 0, 0.5) !important;
+}
+
+
+/* ===== TIPTAP EDITOR ===== */
+.prose-editor { min-height: 360px; padding: 1.25rem; font-size: 0.95rem; line-height: 1.75; color: #1a1a1a; }
+.dark .prose-editor { color: #e5e5e5; }
+.prose-editor:focus { outline: none; }
+.prose-editor p { margin-bottom: 0.85rem; }
+.prose-editor h2 { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+.prose-editor h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; margin: 1.25rem 0 0.6rem; }
+.prose-editor h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; }
+.prose-editor ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 0.85rem; }
+.prose-editor ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 0.85rem; }
+.prose-editor li { margin-bottom: 0.3rem; }
+.prose-editor blockquote { border-left: 3px solid #8B0000; padding-left: 1rem; font-style: italic; color: #555; margin: 1rem 0; }
+.prose-editor a { color: #8B0000; text-decoration: underline; }
+.prose-editor img.editor-image, .prose-editor img { max-width: 100%; height: auto; margin: 1.25rem 0; display: block; }
+.prose-editor strong { font-weight: 700; }
+.prose-editor code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
+.prose-editor p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: left; color: #9ca3af; pointer-events: none; height: 0; }
+
+/* Rendered article content (public side) */
+.article-content { font-size: 1.05rem; line-height: 1.85; color: #333; }
+.article-content p { margin-bottom: 1.25rem; }
+.article-content h2 { font-family: 'Fraunces', serif; font-size: 1.9rem; font-weight: 600; margin: 2rem 0 1rem; color: #111; }
+.article-content h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; margin: 1.75rem 0 0.85rem; color: #111; }
+.article-content h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: #111; }
+.article-content ul { list-style: disc; padding-left: 1.6rem; margin-bottom: 1.25rem; }
+.article-content ol { list-style: decimal; padding-left: 1.6rem; margin-bottom: 1.25rem; }
+.article-content li { margin-bottom: 0.5rem; }
+.article-content blockquote { border-left: 4px solid #8B0000; padding: 0.5rem 0 0.5rem 1.5rem; font-style: italic; color: #555; margin: 1.5rem 0; font-size: 1.15rem; }
+.article-content a { color: #8B0000; text-decoration: underline; }
+.article-content img { max-width: 100%; height: auto; margin: 1.75rem 0; }
+
 
 /* Prevent flashing before Alpine initializes */
 [x-cloak] {

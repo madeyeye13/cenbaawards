@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ sidebarOpen: window.innerWidth >= 768 }" x-cloak
-      :class="{ 'dark': $store.theme?.dark }"
-      @alpine:init="document.documentElement.removeAttribute('x-cloak'); if(window.innerWidth < 768) sidebarOpen = false; window.addEventListener('resize', () => { if(window.innerWidth < 768) sidebarOpen = false; else sidebarOpen = true; })">
+<html lang="en"
+      x-data="{ sidebarOpen: window.innerWidth >= 768 }"
+      x-init="
+        if (window.innerWidth < 768) sidebarOpen = false;
+        window.addEventListener('resize', () => {
+            sidebarOpen = window.innerWidth >= 768;
+        });
+      ">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,32 +31,34 @@
     </div>
 
     {{-- SIDEBAR --}}
+    
     <aside
-        x-show="sidebarOpen"
-        @click.outside="sidebarOpen = false"
-        class="fixed md:static md:w-64 z-40 h-full w-64 flex-shrink-0 flex flex-col transition-all duration-300 ease-in-out md:transition-none md:relative"
-        style="background: #8B0000;"
-    >
+    x-show="sidebarOpen"
+    x-cloak
+    class="fixed md:static md:w-64 z-40 h-full w-64 flex-shrink-0 flex flex-col transition-all duration-300 ease-in-out md:transition-none md:relative"
+    style="background: #8B0000;"
+>
         {{-- Gold top border --}}
-        <div class="absolute top-0 left-0 right-0 h-0.5" style="background: linear-gradient(to right, #C9A84C, transparent);"></div>
+        <div class="absolute top-0 left-0 right-0 h-0.5" style="background: linear-gradient(to right, #FBA320, transparent);"></div>
 
         {{-- Logo --}}
         <div class="flex items-center gap-3 px-5 py-5 border-b" style="border-color: rgba(255,255,255,0.1);">
             {{-- Replace with image: <img src="{{ asset('images/logo.png') }}" class="h-8 w-auto"> --}}
             <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center"
                  style="background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4);">
-                <span style="color: #C9A84C; font-family: 'DM Serif Display', serif;" class="text-sm font-bold">C</span>
+                <span style="color: #FBA320; font-family: 'Fraunces', serif;" class="text-sm font-bold">C</span>
             </div>
             <span x-show="sidebarOpen" x-transition:enter="transition-opacity duration-200"
                   x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                   class="text-white font-semibold text-sm whitespace-nowrap"
-                  style="font-family: 'DM Serif Display', serif;">
+                  style="font-family: 'Fraunces', serif;">
                 CenBa Awards
             </span>
         </div>
 
         {{-- Navigation --}}
-        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1"
+     @click="if (window.innerWidth < 768) sidebarOpen = false">
 
             {{-- Main --}}
             <div x-show="sidebarOpen" class="px-2 mb-2">
@@ -251,14 +258,15 @@
 
                     {{-- Dropdown --}}
                     <div x-show="open"
-                         x-transition:enter="transition ease-out duration-100"
-                         x-transition:enter-start="opacity-0 scale-95"
-                         x-transition:enter-end="opacity-100 scale-100"
-                         x-transition:leave="transition ease-in duration-75"
-                         x-transition:leave-start="opacity-100 scale-100"
-                         x-transition:leave-end="opacity-0 scale-95"
-                         class="absolute right-0 top-full mt-2 w-48 rounded-xl shadow-lg border overflow-hidden z-50 bg-white dark:bg-neutral-900 dark:border-neutral-800"
-                         style="border-color: #E5E7EB;">
+                        x-cloak
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="opacity-0 scale-95"
+                        x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="opacity-100 scale-100"
+                        x-transition:leave-end="opacity-0 scale-95"
+                        class="absolute right-0 top-full mt-2 w-48 rounded-xl shadow-lg border overflow-hidden z-50 bg-white dark:bg-neutral-900 dark:border-neutral-800"
+                        style="border-color: #E5E7EB;">
                         <div class="p-1">
                             <a href="{{ route('admin.settings.index') }}" wire:navigate
                                class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors text-gray-700 hover:bg-gray-50 dark:text-neutral-300 dark:hover:bg-neutral-800">
@@ -355,33 +363,33 @@
 
 @livewireScripts
 
-<script>
-function toastManager() {
-    return {
-        toasts: [],
-        add(detail) {
-            const id = Date.now();
-            const toast = {
-                id,
-                type: detail.type || 'info',
-                title: detail.title || '',
-                message: detail.message || '',
-                show: true,
-            };
-            this.toasts.push(toast);
-            setTimeout(() => this.remove(id), detail.duration || 4000);
-        },
-        remove(id) {
-            const toast = this.toasts.find(t => t.id === id);
-            if (toast) {
-                toast.show = false;
-                setTimeout(() => {
-                    this.toasts = this.toasts.filter(t => t.id !== id);
-                }, 300);
+<script data-navigate-once>
+    window.toastManager = function () {
+        return {
+            toasts: [],
+            add(detail) {
+                const id = Date.now();
+                const toast = {
+                    id,
+                    type: detail.type || 'info',
+                    title: detail.title || '',
+                    message: detail.message || '',
+                    show: true,
+                };
+                this.toasts.push(toast);
+                setTimeout(() => this.remove(id), detail.duration || 4000);
+            },
+            remove(id) {
+                const toast = this.toasts.find(t => t.id === id);
+                if (toast) {
+                    toast.show = false;
+                    setTimeout(() => {
+                        this.toasts = this.toasts.filter(t => t.id !== id);
+                    }, 300);
+                }
             }
         }
     }
-}
 </script>
 
 </body>
