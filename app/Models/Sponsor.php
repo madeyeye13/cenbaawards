@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sponsor extends Model
 {
-    protected $fillable = [
-        'name', 'logo', 'website', 'tier',
-        'description', 'order', 'is_active',
-    ];
+    protected $fillable = ['name', 'logo', 'website', 'tier', 'description', 'order', 'is_active'];
+    protected $casts = ['is_active' => 'boolean', 'order' => 'integer'];
 
-    protected function casts(): array
+    public function getLogoUrlAttribute(): ?string
     {
-        return ['is_active' => 'boolean'];
+        return $this->logo ? asset('storage/' . $this->logo) : null;
     }
 }

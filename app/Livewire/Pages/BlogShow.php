@@ -68,6 +68,13 @@ class BlogShow extends Component
             'next' => $this->post->nextPost(),
             'previous' => $this->post->previousPost(),
             'comments' => $this->post->approvedComments()->with('replies')->get(),
+            'recentPosts' => \App\Models\Post::published()
+                ->where('id', '!=', $this->post->id)
+                ->ordered()->take(4)->get(),
+            'categories' => \App\Models\Category::where('is_active', true)
+                ->withCount(['posts' => fn($q) => $q->published()])
+                ->orderBy('name')->get(),
+            'popularTags' => \App\Models\Tag::has('posts')->take(12)->get(),
         ]);
     }
 }

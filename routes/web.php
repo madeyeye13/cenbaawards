@@ -17,9 +17,7 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
-Route::get('/winners', function () {
-    return view('pages.winners');
-})->name('winners');
+Route::get('/winners', \App\Livewire\Pages\Winners::class)->name('winners');
 
 // Award Routes
 Route::prefix('award')->name('award.')->group(function () {
@@ -35,17 +33,10 @@ Route::get('/blog/{post:slug}', \App\Livewire\Pages\BlogShow::class)->name('blog
 
 // Events Routes
 Route::prefix('events')->name('events.')->group(function () {
-    Route::get('/', function () {
-        return view('events.index');
-    })->name('index');
-
-    Route::get('/gallery', function () {
-        return view('events.gallery');
-    })->name('gallery');
-
-    Route::get('/partners', function () {
-        return view('events.partners');
-    })->name('partners');
+        // Replace the old gallery stub with these two:
+    Route::get('/gallery', \App\Livewire\Pages\Gallery::class)->name('gallery');
+    Route::get('/gallery/{slug}', \App\Livewire\Pages\GalleryAlbum::class)->name('gallery.album');
+    Route::get('/partners', \App\Livewire\Pages\Partners::class)->name('partners');
 });
 
 /*
@@ -75,6 +66,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/posts/create', \App\Livewire\Admin\PostEditor::class)->name('posts.create');
         Route::get('/posts/{post}/edit', \App\Livewire\Admin\PostEditor::class)->name('posts.edit');
 
+        Route::get('/comments', \App\Livewire\Admin\Comments::class)->name('comments.index');
+
         // Award Categories
         Route::get('/award-categories', function () {
             return view('admin.award-categories.index');
@@ -89,24 +82,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/judges', \App\Livewire\Admin\Judges::class)->name('judges.index');
 
         // Winners
-        Route::get('/winners', function () {
-            return view('admin.winners.index');
-        })->name('winners.index');
+        Route::get('/winners', \App\Livewire\Admin\Winners::class)->name('winners.index');
 
         // Gallery
-        Route::get('/gallery', function () {
-            return view('admin.gallery.index');
-        })->name('gallery.index');
+        Route::get('/gallery', \App\Livewire\Admin\GalleryAlbums::class)->name('gallery.index');
+        Route::get('/gallery/{slug}', \App\Livewire\Admin\GalleryAlbumImages::class)->name('gallery.album');
 
-        // Partners
-        Route::get('/partners', function () {
-            return view('admin.partners.index');
-        })->name('partners.index');
-
-        // Sponsors
-        Route::get('/sponsors', function () {
-            return view('admin.sponsors.index');
-        })->name('sponsors.index');
+        // Partners & Sponsors
+        Route::get('/partners-sponsors', \App\Livewire\Admin\PartnersSponsors::class)->name('partners-sponsors.index');
 
         // Events
         Route::get('/events', function () {

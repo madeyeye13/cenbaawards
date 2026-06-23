@@ -27,6 +27,7 @@ class PostEditor extends Component
     public ?string $featured_image = null;
     public ?string $featured_image_url = null;
     public ?int $category_id = null;
+    public string $newCategory = '';
     public array $selectedTags = [];
     public string $newTag = '';
     public string $status = 'draft';
@@ -109,6 +110,21 @@ class PostEditor extends Component
     {
         $this->og_image = null;
         $this->og_image_url = null;
+    }
+
+    public function addCategory(): void
+    {
+        $name = trim($this->newCategory);
+        if ($name === '') return;
+
+        $category = \App\Models\Category::firstOrCreate(
+            ['name' => $name],
+            ['slug' => \Illuminate\Support\Str::slug($name), 'is_active' => true]
+        );
+
+        $this->category_id = $category->id;
+        $this->newCategory = '';
+        $this->dispatch('toast', type: 'success', title: 'Category added', message: $category->name);
     }
 
     // ===== Tags =====

@@ -21,4 +21,9 @@ class Winner extends Model
     {
         return $this->belongsTo(AwardCategory::class);
     }
+
+     public function getPhotoUrlAttribute(): ?string
+    {
+        return $this->photo ? asset('storage/' . $this->photo) : null;
+    }
 }

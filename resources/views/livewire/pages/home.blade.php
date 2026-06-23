@@ -521,4 +521,60 @@
     </div>
 </section>
 
+{{-- ============================================================
+     SECTION: LATEST NEWS (only shows if posts exist)
+     ============================================================ --}}
+@if($latestPosts->count() > 0)
+<section id="latest-news" aria-labelledby="news-heading" class="bg-cream">
+    <div class="max-w-7xl mx-auto px-6 xl:px-16 py-24">
+
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
+            <div>
+                <div class="flex items-center gap-3 mb-4" aria-hidden="true">
+                    <div class="w-8 h-px bg-crimson"></div>
+                    <span class="text-xs font-semibold tracking-[0.25em] uppercase text-crimson">News &amp; Updates</span>
+                </div>
+                <h2 id="news-heading" class="font-serif font-normal text-ink" style="font-size: clamp(2rem, 4vw, 3rem);">
+                    Latest from the Blog
+                </h2>
+            </div>
+            <a href="{{ route('blog.index') }}" wire:navigate
+               class="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase pb-1 transition-colors text-crimson border-b border-crimson hover:text-gold hover:border-gold self-start sm:self-auto">
+                View All Posts
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($latestPosts as $post)
+            <article class="group flex flex-col bg-white">
+                <a href="{{ route('blog.show', $post->slug) }}" wire:navigate class="block overflow-hidden" style="aspect-ratio: 16/10; background: #E8E0D0;">
+                    @if($post->featured_image)
+                        <img src="{{ asset('storage/' . $post->featured_image) }}" alt="{{ $post->title }}"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             loading="lazy" decoding="async">
+                    @endif
+                </a>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 {{ $post->type === 'press_release' ? 'bg-gold/15 text-gold-dim' : 'bg-crimson/10 text-crimson' }}">
+                            {{ $post->type === 'press_release' ? 'Press' : 'Blog' }}
+                        </span>
+                        <span class="text-xs text-[#999999]">{{ $post->published_at->format('M d, Y') }}</span>
+                    </div>
+                    <h3 class="font-serif font-semibold text-ink leading-snug mb-2 transition-colors group-hover:text-crimson" style="font-size: 1.05rem;">
+                        <a href="{{ route('blog.show', $post->slug) }}" wire:navigate>{{ Str::limit($post->title, 60) }}</a>
+                    </h3>
+                    <p class="text-sm leading-relaxed text-[#666666] flex-1">{{ Str::limit($post->excerpt_or_trimmed, 90) }}</p>
+                </div>
+            </article>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+@endif
+
 </div>

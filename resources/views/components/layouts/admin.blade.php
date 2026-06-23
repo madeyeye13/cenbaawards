@@ -140,6 +140,15 @@
                 <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Blog Posts</span>
             </a>
 
+            <a href="{{ route('admin.comments.index') }}" wire:navigate
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.comments.*') ? 'text-white' : 'text-white/60 hover:text-white hover:bg-white/10' }}"
+                style="{{ request()->routeIs('admin.comments.*') ? 'background: rgba(201,168,76,0.2);' : '' }}">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                    </svg>
+                    <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Comments</span>
+            </a>
+
             <a href="{{ route('admin.gallery.index') }}" wire:navigate
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.gallery.*') ? 'text-white' : 'text-white/60 hover:text-white hover:bg-white/10' }}"
                style="{{ request()->routeIs('admin.gallery.*') ? 'background: rgba(201,168,76,0.2);' : '' }}">
@@ -164,22 +173,13 @@
             </div>
             <div x-show="!sidebarOpen" class="border-t my-2" style="border-color: rgba(255,255,255,0.1);"></div>
 
-            <a href="{{ route('admin.partners.index') }}" wire:navigate
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.partners.*') ? 'text-white' : 'text-white/60 hover:text-white hover:bg-white/10' }}"
-               style="{{ request()->routeIs('admin.partners.*') ? 'background: rgba(201,168,76,0.2);' : '' }}">
+            <a href="{{ route('admin.partners-sponsors.index') }}" wire:navigate
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.partners-sponsors.*') ? 'text-white' : 'text-white/60 hover:text-white hover:bg-white/10' }}"
+                style="{{ request()->routeIs('admin.partners-sponsors.*') ? 'background: rgba(201,168,76,0.2);' : '' }}">
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
-                <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Partners</span>
-            </a>
-
-            <a href="{{ route('admin.sponsors.index') }}" wire:navigate
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.sponsors.*') ? 'text-white' : 'text-white/60 hover:text-white hover:bg-white/10' }}"
-               style="{{ request()->routeIs('admin.sponsors.*') ? 'background: rgba(201,168,76,0.2);' : '' }}">
-                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Sponsors</span>
+                <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Partners &amp; Sponsors</span>
             </a>
 
             <a href="{{ route('admin.team.index') }}" wire:navigate

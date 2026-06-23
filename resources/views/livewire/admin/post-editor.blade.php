@@ -16,8 +16,10 @@
                 <span wire:loading.remove wire:target="save">Save Draft</span>
                 <span wire:loading wire:target="save">Saving...</span>
             </button>
-            <button wire:click="save('publish')" class="px-6 py-2.5 bg-red-800 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-colors">
-                Publish
+            <button wire:click="save('publish')" wire:loading.attr="disabled" wire:target="save"
+                    class="px-6 py-2.5 bg-red-800 hover:bg-red-700 disabled:opacity-50 text-white text-sm font-semibold rounded-lg transition-colors">
+                <span wire:loading.remove wire:target="save">Publish</span>
+                <span wire:loading wire:target="save">Publishing...</span>
             </button>
         </div>
     </div>
@@ -41,50 +43,50 @@
                 @error('slug') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-{{-- EDITOR --}}
-<div wire:ignore x-data="tiptapEditor(@js($body), 'post-editor-{{ $editing ? $post->id : 'new' }}')" class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 overflow-hidden">
+            {{-- EDITOR --}}
+            <div wire:ignore x-data="tiptapEditor(@js($body), 'post-editor-{{ $editing ? $post->id : 'new' }}')" class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 overflow-hidden">
 
-    {{-- Toolbar --}}
-    <div class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-800/50">
-        <button type="button" @click="toggle('toggleBold')" :disabled="!isEditorReady" :class="isActive('bold') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors font-bold text-sm disabled:cursor-not-allowed">B</button>
-        
-        <button type="button" @click="toggle('toggleItalic')" :disabled="!isEditorReady" :class="isActive('italic') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors italic text-sm disabled:cursor-not-allowed">I</button>
-        
-        <button type="button" @click="toggle('toggleStrike')" :disabled="!isEditorReady" :class="isActive('strike') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors line-through text-sm disabled:cursor-not-allowed">S</button>
+                {{-- Toolbar --}}
+                <div class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-800/50">
+                    <button type="button" @click="toggle('toggleBold')" :disabled="!isEditorReady" :class="isActive('bold') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors font-bold text-sm disabled:cursor-not-allowed">B</button>
+                    
+                    <button type="button" @click="toggle('toggleItalic')" :disabled="!isEditorReady" :class="isActive('italic') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors italic text-sm disabled:cursor-not-allowed">I</button>
+                    
+                    <button type="button" @click="toggle('toggleStrike')" :disabled="!isEditorReady" :class="isActive('strike') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors line-through text-sm disabled:cursor-not-allowed">S</button>
 
-        <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
+                    <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
-        <button type="button" @click="toggle('toggleHeading', { level: 2 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 2 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H2</button>
-        
-        <button type="button" @click="toggle('toggleHeading', { level: 3 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 3 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H3</button>
-        
-        <button type="button" @click="toggle('toggleHeading', { level: 4 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 4 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H4</button>
+                    <button type="button" @click="toggle('toggleHeading', { level: 2 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 2 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H2</button>
+                    
+                    <button type="button" @click="toggle('toggleHeading', { level: 3 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 3 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H3</button>
+                    
+                    <button type="button" @click="toggle('toggleHeading', { level: 4 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 4 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H4</button>
 
-        <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
+                    <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
-        <button type="button" @click="toggle('toggleBulletList')" :disabled="!isEditorReady" :class="isActive('bulletList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors disabled:cursor-not-allowed" title="Bullet list">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-        
-        <button type="button" @click="toggle('toggleOrderedList')" :disabled="!isEditorReady" :class="isActive('orderedList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">1.</button>
-        
-        <button type="button" @click="toggle('toggleBlockquote')" :disabled="!isEditorReady" :class="isActive('blockquote') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-lg disabled:cursor-not-allowed">"</button>
+                    <button type="button" @click="toggle('toggleBulletList')" :disabled="!isEditorReady" :class="isActive('bulletList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors disabled:cursor-not-allowed" title="Bullet list">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                    
+                    <button type="button" @click="toggle('toggleOrderedList')" :disabled="!isEditorReady" :class="isActive('orderedList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">1.</button>
+                    
+                    <button type="button" @click="toggle('toggleBlockquote')" :disabled="!isEditorReady" :class="isActive('blockquote') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-lg disabled:cursor-not-allowed">"</button>
 
-        <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
+                    <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
-        <button type="button" @click="setLink()" :disabled="!isEditorReady" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300 disabled:opacity-50 disabled:cursor-not-allowed" title="Add link">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-        </button>
+                    <button type="button" @click="setLink()" :disabled="!isEditorReady" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300 disabled:opacity-50 disabled:cursor-not-allowed" title="Add link">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    </button>
 
-        <button type="button" @click="$wire.dispatch('openMediaPicker', { name: 'inline-image', multiple: false })" :disabled="!isEditorReady" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300 disabled:opacity-50 disabled:cursor-not-allowed" title="Insert image">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        </button>
-    </div>
+                    <button type="button" @click="$wire.dispatch('openMediaPicker', { name: 'inline-image', multiple: false })" :disabled="!isEditorReady" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300 disabled:opacity-50 disabled:cursor-not-allowed" title="Insert image">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </button>
+                </div>
 
-    {{-- Editor mount point --}}
-    <div x-ref="editor"></div>
-    @error('body') <p class="text-red-500 text-xs p-3">{{ $message }}</p> @enderror
-</div>
+                {{-- Editor mount point --}}
+                <div x-ref="editor"></div>
+                @error('body') <p class="text-red-500 text-xs p-3">{{ $message }}</p> @enderror
+            </div>
 
             {{-- Excerpt --}}
             <div class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 p-5">
@@ -173,12 +175,16 @@
             {{-- Category --}}
             <div class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 p-5">
                 <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-3">Category</label>
-                <select wire:model="category_id" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+                <select wire:model="category_id" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500 mb-3">
                     <option value="">— Select —</option>
                     @foreach($categories as $cat)
                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                     @endforeach
                 </select>
+                <div class="flex gap-2">
+                    <input wire:model="newCategory" wire:keydown.enter.prevent="addCategory" type="text" placeholder="New category..." class="flex-1 px-3 py-2 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+                    <button type="button" wire:click="addCategory" class="px-3 py-2 bg-red-800 hover:bg-red-700 text-white text-xs font-semibold rounded-lg">Add</button>
+                </div>
             </div>
 
             {{-- Tags --}}
