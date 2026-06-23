@@ -1,4 +1,4 @@
-<div class="p-6" x-data="tiptapEditor(@js($body))" wire:ignore.self>
+<div class="p-6">
 
     {{-- Header --}}
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -41,47 +41,50 @@
                 @error('slug') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- EDITOR --}}
-            <div class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 overflow-hidden">
+{{-- EDITOR --}}
+<div wire:ignore x-data="tiptapEditor(@js($body), 'post-editor-{{ $editing ? $post->id : 'new' }}')" class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 overflow-hidden">
 
-                {{-- Toolbar --}}
-                <div class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-800/50">
-                    <button type="button" @click="toggle('toggleBold')" :class="isActive('bold') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors font-bold text-sm">B</button>
-                    <button type="button" @click="toggle('toggleItalic')" :class="isActive('italic') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors italic text-sm">I</button>
-                    <button type="button" @click="toggle('toggleStrike')" :class="isActive('strike') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors line-through text-sm">S</button>
+    {{-- Toolbar --}}
+    <div class="flex flex-wrap items-center gap-1 p-2 border-b border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-800/50">
+        <button type="button" @click="toggle('toggleBold')" :disabled="!isEditorReady" :class="isActive('bold') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors font-bold text-sm disabled:cursor-not-allowed">B</button>
+        
+        <button type="button" @click="toggle('toggleItalic')" :disabled="!isEditorReady" :class="isActive('italic') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors italic text-sm disabled:cursor-not-allowed">I</button>
+        
+        <button type="button" @click="toggle('toggleStrike')" :disabled="!isEditorReady" :class="isActive('strike') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors line-through text-sm disabled:cursor-not-allowed">S</button>
 
-                    <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
+        <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
-                    <button type="button" @click="toggle('toggleHeading', { level: 2 })" :class="isActive('heading', { level: 2 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold">H2</button>
-                    <button type="button" @click="toggle('toggleHeading', { level: 3 })" :class="isActive('heading', { level: 3 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold">H3</button>
-                    <button type="button" @click="toggle('toggleHeading', { level: 4 })" :class="isActive('heading', { level: 4 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold">H4</button>
+        <button type="button" @click="toggle('toggleHeading', { level: 2 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 2 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H2</button>
+        
+        <button type="button" @click="toggle('toggleHeading', { level: 3 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 3 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H3</button>
+        
+        <button type="button" @click="toggle('toggleHeading', { level: 4 })" :disabled="!isEditorReady" :class="isActive('heading', { level: 4 }) ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="px-2 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">H4</button>
 
-                    <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
+        <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
-                    <button type="button" @click="toggle('toggleBulletList')" :class="isActive('bulletList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors" title="Bullet list">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    </button>
-                    <button type="button" @click="toggle('toggleOrderedList')" :class="isActive('orderedList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold">1.</button>
-                    <button type="button" @click="toggle('toggleBlockquote')" :class="isActive('blockquote') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-lg">"</button>
+        <button type="button" @click="toggle('toggleBulletList')" :disabled="!isEditorReady" :class="isActive('bulletList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors disabled:cursor-not-allowed" title="Bullet list">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        
+        <button type="button" @click="toggle('toggleOrderedList')" :disabled="!isEditorReady" :class="isActive('orderedList') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-xs font-bold disabled:cursor-not-allowed">1.</button>
+        
+        <button type="button" @click="toggle('toggleBlockquote')" :disabled="!isEditorReady" :class="isActive('blockquote') ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300' : 'text-gray-600 dark:text-neutral-300 disabled:opacity-50'" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-lg disabled:cursor-not-allowed">"</button>
 
-                    <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
+        <div class="w-px h-6 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
-                    <button type="button" @click="setLink()" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300" title="Add link">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-                    </button>
+        <button type="button" @click="setLink()" :disabled="!isEditorReady" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300 disabled:opacity-50 disabled:cursor-not-allowed" title="Add link">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+        </button>
 
-                    {{-- Insert image from media library --}}
-                    <button type="button" wire:click="$dispatch('openMediaPicker', { name: 'inline-image', multiple: false })" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300" title="Insert image">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                    </button>
-                </div>
+        <button type="button" @click="$wire.dispatch('openMediaPicker', { name: 'inline-image', multiple: false })" :disabled="!isEditorReady" class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors text-gray-600 dark:text-neutral-300 disabled:opacity-50 disabled:cursor-not-allowed" title="Insert image">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </button>
+    </div>
 
-                {{-- Editor mount point --}}
-                <div wire:ignore>
-                    <div x-ref="editor"></div>
-                </div>
-                @error('body') <p class="text-red-500 text-xs p-3">{{ $message }}</p> @enderror
-            </div>
+    {{-- Editor mount point --}}
+    <div x-ref="editor"></div>
+    @error('body') <p class="text-red-500 text-xs p-3">{{ $message }}</p> @enderror
+</div>
 
             {{-- Excerpt --}}
             <div class="bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 p-5">

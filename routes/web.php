@@ -29,15 +29,9 @@ Route::prefix('award')->name('award.')->group(function () {
 });
 
 // Blog Routes
-Route::prefix('blog')->name('blog.')->group(function () {
-    Route::get('/', function () {
-        return view('blog.index');
-    })->name('index');
-
-    Route::get('/{slug}', function ($slug) {
-        return view('blog.show', compact('slug'));
-    })->name('show');
-});
+// Blog / News
+Route::get('/blog', \App\Livewire\Pages\Blog::class)->name('blog.index');
+Route::get('/blog/{post:slug}', \App\Livewire\Pages\BlogShow::class)->name('blog.show');
 
 // Events Routes
 Route::prefix('events')->name('events.')->group(function () {
@@ -77,9 +71,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/media', \App\Livewire\Admin\MediaLibrary::class)->name('media.index');
 
         // Posts (Blog + Press Release)
-Route::get('/posts', \App\Livewire\Admin\Posts::class)->name('posts.index');
-Route::get('/posts/create', \App\Livewire\Admin\PostEditor::class)->name('posts.create');
-Route::get('/posts/{post}/edit', \App\Livewire\Admin\PostEditor::class)->name('posts.edit');
+        Route::get('/posts', \App\Livewire\Admin\Posts::class)->name('posts.index');
+        Route::get('/posts/create', \App\Livewire\Admin\PostEditor::class)->name('posts.create');
+        Route::get('/posts/{post}/edit', \App\Livewire\Admin\PostEditor::class)->name('posts.edit');
 
         // Award Categories
         Route::get('/award-categories', function () {
