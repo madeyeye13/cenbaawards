@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Auth\Login;
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | PUBLIC ROUTES
@@ -13,9 +14,8 @@ Route::get('/', \App\Livewire\Pages\Home::class)->name('home');
 Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 
 
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
+Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
+
 
 Route::get('/winners', \App\Livewire\Pages\Winners::class)->name('winners');
 
@@ -38,6 +38,14 @@ Route::prefix('events')->name('events.')->group(function () {
     Route::get('/gallery/{slug}', \App\Livewire\Pages\GalleryAlbum::class)->name('gallery.album');
     Route::get('/partners', \App\Livewire\Pages\Partners::class)->name('partners');
 });
+
+Route::get('/sitemap.xml', function () {
+    $path = public_path('sitemap.xml');
+    if (!file_exists($path)) {
+        Artisan::call('sitemap:generate');
+    }
+    return response()->file($path, ['Content-Type' => 'application/xml']);
+})->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------
@@ -102,15 +110,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         })->name('team.index');
 
         // Contacts
-        Route::get('/contacts', function () {
-            return view('admin.contacts.index');
-        })->name('contacts.index');
+        Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts.index');
 
         // Settings
-        Route::get('/settings', function () {
-            return view('admin.settings.index');
-        })->name('settings.index');
-
+        Route::get('/settings', \App\Livewire\Admin\Settings::class)->name('settings.index');
         // Logout
         Route::post('/logout', function () {
             auth('admin')->logout();

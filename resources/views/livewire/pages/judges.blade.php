@@ -3,7 +3,7 @@
 {{-- PAGE HERO --}}
 <section aria-label="Our Judges hero" class="relative" style="padding-top: 70px; min-height: 420px;">
     <div class="absolute inset-0" style="top: 70px;">
-        <img src="{{ asset('images/judges-hero.jpg') }}" alt="CenBa Awards Panel of Judges"
+        <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/judges-hero.jpg') }}" alt="CenBa Awards Panel of Judges"
              class="w-full h-full object-cover" loading="eager" decoding="async">
     </div>
     <div class="absolute inset-0 bg-black/70" style="top: 70px;" aria-hidden="true"></div>

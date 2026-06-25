@@ -32,7 +32,7 @@ class Dashboard extends Component
             ['label' => 'Add Winner', 'route' => 'admin.winners.index', 'color' => '#FBA320'],
             ['label' => 'Upload Media', 'route' => 'admin.media.index', 'color' => '#10B981'],
             ['label' => 'Add Judge', 'route' => 'admin.judges.index', 'color' => '#8B5CF6'],
-            ['label' => 'Add Partner', 'route' => 'admin.partners.index', 'color' => '#F59E0B'],
+            ['label' => 'Add Partner', 'route' => 'admin.partners-sponsors.index', 'color' => '#F59E0B'],
             ['label' => 'View Contacts', 'route' => 'admin.contacts.index', 'color' => '#EF4444'],
         ];
     }

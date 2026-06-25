@@ -6,7 +6,7 @@
 <section aria-label="About page hero" class="relative" style="padding-top: 70px; min-height: 480px;">
 
     <div class="absolute inset-0" style="top: 70px;">
-        <img src="{{ asset('images/about-hero.jpg') }}"
+        <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/about-hero.jpg') }}"
              alt="CenBa Africa Business Excellence Awards ceremony"
              class="w-full h-full object-cover" loading="eager" decoding="async">
     </div>
@@ -76,11 +76,11 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div style="aspect-ratio: 3/4; overflow: hidden;">
-                    <img src="{{ asset('images/about-1.jpg') }}" alt="CenBa Awards ceremony — delegates and attendees"
+                    <img src="{{ $aboutImage1 ? asset('storage/' . $aboutImage1) : asset('images/about-1.jpg') }}" alt="CenBa Awards ceremony — delegates and attendees"
                          class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
                 <div class="mt-10" style="aspect-ratio: 3/4; overflow: hidden;">
-                    <img src="{{ asset('images/about-2.jpg') }}" alt="CenBa Awards — business leaders gathering"
+                    <img src="{{ $aboutImage2 ? asset('storage/' . $aboutImage2) : asset('images/about-2.jpg') }}" alt="CenBa Awards — business leaders gathering"
                          class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
             </div>
@@ -99,7 +99,7 @@
 
             <div class="relative">
                 <div style="aspect-ratio: 4/3; overflow: hidden;">
-                    <img src="{{ asset('images/history.jpg') }}" alt="CenBa Awards history — founding ceremony 2016"
+                    <img src="{{ $historyImage ? asset('storage/' . $historyImage) : asset('images/history.jpg') }}" alt="CenBa Awards history — founding ceremony 2016"
                          class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
                 <div class="absolute bottom-0 left-0 px-8 py-6 text-white bg-crimson">
@@ -301,11 +301,11 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div style="aspect-ratio: 3/4; overflow: hidden;">
-                    <img src="{{ asset('images/institute-1.jpg') }}" alt="CenBa Graduate Institute — training session"
+                    <img src="{{ $instituteImage1 ? asset('storage/' . $instituteImage1) : asset('images/institute-1.jpg') }}" alt="CenBa Graduate Institute — training session"
                          class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
                 <div class="mt-10" style="aspect-ratio: 3/4; overflow: hidden;">
-                    <img src="{{ asset('images/institute-2.jpg') }}" alt="CenBa Graduate Institute — campus"
+                    <img src="{{ $instituteImage2 ? asset('storage/' . $instituteImage2) : asset('images/institute-2.jpg') }}" alt="CenBa Graduate Institute — campus"
                          class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
             </div>

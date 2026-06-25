@@ -3,7 +3,7 @@
 {{-- HERO --}}
 <section aria-label="Partners hero" class="relative" style="padding-top: 70px; min-height: 420px;">
     <div class="absolute inset-0" style="top: 70px;">
-        <img src="{{ asset('images/partners-hero.jpg') }}" alt="CenBa Partners & Sponsors"
+        <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/partners-hero.jpg') }}" alt="CenBa Partners & Sponsors"
              class="w-full h-full object-cover" loading="eager" decoding="async">
     </div>
     <div class="absolute inset-0 bg-black/70" style="top: 70px;" aria-hidden="true"></div>

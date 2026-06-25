@@ -3,7 +3,7 @@
 {{-- PAGE HERO --}}
 <section aria-label="Award Categories hero" class="relative" style="padding-top: 70px; min-height: 420px;">
     <div class="absolute inset-0" style="top: 70px;">
-        <img src="{{ asset('images/categories-hero.jpg') }}" alt="CenBa Award Categories"
+        <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/categories-hero.jpg') }}" alt="CenBa Award Categories"
              class="w-full h-full object-cover" loading="eager" decoding="async">
     </div>
     <div class="absolute inset-0 bg-black/70" style="top: 70px;" aria-hidden="true"></div>
@@ -118,7 +118,7 @@
                 Found Your Category? Submit a Nomination Today
             </h2>
             <p class="mb-10 leading-relaxed text-white/70" style="font-size: 1rem;">
-                Whether you're nominating your own business or recognising another, the process is quick and simple. Submit before 1st December, 2025.
+                Whether you're nominating your own business or recognising another, the process is quick and simple. Submit before 6th November, 2026.
             </p>
             <a href="https://forms.gle/iDMoH2Qb9oHKLqDTA" target="_blank" rel="noopener noreferrer"
                class="inline-flex items-center gap-2 px-10 py-4 font-semibold text-sm tracking-widest uppercase transition-all duration-200 bg-gold text-ink hover:bg-gold-light">

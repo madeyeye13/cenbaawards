@@ -5,6 +5,7 @@ namespace App\Livewire\Pages;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use App\Models\Setting;
 
 #[Layout('components.layouts.app')]
 #[Title('Award Categories — CenBa Africa Business Excellence Awards')]
@@ -12,6 +13,7 @@ class AwardCategories extends Component
 {
     public array $industryCategories = [];
     public array $sectorCategories = [];
+    public ?string $heroImage = null;
 
     public function mount(): void
     {
@@ -36,10 +38,33 @@ class AwardCategories extends Component
             ['name' => 'Best Brand Development', 'body' => 'Recognising continuous brand development crucial to attracting new investors, partners and customers, remaining competitive and well-positioned for future growth.'],
             ['name' => 'Outstanding Customer Focus Award', 'body' => 'For an organisation that goes the extra mile and builds itself around the needs and wants of its target market, providing services that meet customers\' expectations.'],
         ];
+
+        $this->heroImage = Setting::get('categories_hero_image');
     }
 
     public function render()
-    {
-        return view('livewire.pages.award-categories');
-    }
+{
+    $hash = '#';
+    $schema = '<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "' . route('award.categories') . $hash . 'webpage",
+    "url": "' . route('award.categories') . '",
+    "name": "Award Categories — CenBa Africa Business Excellence Awards",
+    "description": "Our awards span across diverse industries and sectors, recognising excellence wherever it thrives across Africa.",
+    "isPartOf": { "@id": "' . url('/') . $hash . 'website" },
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "' . route('home') . '" },
+            { "@type": "ListItem", "position": 2, "name": "Award Categories", "item": "' . route('award.categories') . '" }
+        ]
+    },
+    "inLanguage": "en"
+}
+</script>';
+
+    return view('livewire.pages.award-categories')->with('schema', $schema);
+}
 }

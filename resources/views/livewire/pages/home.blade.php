@@ -1,3 +1,4 @@
+
 <div>
 
 {{-- ============================================================
@@ -11,9 +12,9 @@
     x-data="{
         current: 0,
         slides: [
-            { image: '{{ asset('images/hero/slide-1.jpg') }}', alt: 'CenBa Africa Business Excellence Awards Ceremony' },
-            { image: '{{ asset('images/hero/slide-2.jpg') }}', alt: 'CenBa Awards Winners Celebration' },
-            { image: '{{ asset('images/hero/slide-3.jpg') }}', alt: 'CenBa Africa Business Excellence Gala Night' },
+            @foreach($heroSlides as $slide)
+            { image: '{{ $slide['path'] ? asset('storage/' . $slide['path']) : $slide['fallback'] }}', alt: '{{ $slide['alt'] }}' },
+            @endforeach
         ],
         autoplay: null,
         start() { this.autoplay = setInterval(() => { this.current = (this.current + 1) % this.slides.length; }, 6000); },
@@ -120,8 +121,9 @@
 
             <div class="relative order-2 lg:order-1">
                 <div class="relative overflow-hidden" style="aspect-ratio: 4/5;">
-                    <img src="{{ asset('images/about.jpg') }}" alt="CenBa Africa Business Excellence Awards ceremony gathering"
-                         class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <img src="{{ $homeAboutImage ? asset('storage/' . $homeAboutImage) : asset('images/about.jpg') }}"
+                        alt="CenBa Africa Business Excellence Awards ceremony gathering"
+                        class="w-full h-full object-cover" loading="lazy" decoding="async">
                     <div class="absolute bottom-0 right-0 text-white text-center px-8 py-6 bg-crimson">
                         <p class="font-serif font-normal leading-none" style="font-size: 3rem;">9+</p>
                         <p class="text-xs tracking-widest uppercase mt-1 text-white/70">Years of Excellence</p>
@@ -245,11 +247,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="p-5 bg-black/25 border border-white/10">
                         <p class="text-xs tracking-widest uppercase mb-2 text-white/50">Nominations Open</p>
-                        <p class="text-white font-medium">25th September, 2025</p>
+                        <p class="text-white font-medium">12th August, 2026</p>
                     </div>
                     <div class="p-5 bg-black/25 border border-white/10">
                         <p class="text-xs tracking-widest uppercase mb-2 text-white/50">Entries Close</p>
-                        <p class="text-white font-medium">1st December, 2025</p>
+                        <p class="text-white font-medium">6th November, 2026</p>
                     </div>
                 </div>
 
@@ -384,7 +386,7 @@
                         ['step' => '01', 'title' => 'Visit the Nomination Page', 'body' => 'Go to our official nomination page on the website.'],
                         ['step' => '02', 'title' => 'Select a Category', 'body' => 'Choose the appropriate award category that best fits the business.'],
                         ['step' => '03', 'title' => 'Complete the Form', 'body' => 'Fill in the nomination form with accurate and complete details.'],
-                        ['step' => '04', 'title' => 'Submit Before Deadline', 'body' => 'Submit your nomination before 1st December, 2025.'],
+                        ['step' => '04', 'title' => 'Submit Before Deadline', 'body' => 'Submit your nomination before 6th November, 2026.'],
                     ];
                 @endphp
                 @foreach($steps as $step)
@@ -499,7 +501,7 @@
             </h2>
 
             <p class="mb-10 leading-relaxed text-white/70">
-                Nominations are open to all businesses operating in Africa — startups, SMEs, and large corporations across all sectors. Submissions must be received before 1st December, 2025.
+                Nominations are open to all businesses operating in Africa — startups, SMEs, and large corporations across all sectors. Submissions must be received before 6th November, 2026.
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">

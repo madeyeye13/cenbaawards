@@ -5,6 +5,7 @@ namespace App\Livewire\Pages;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use App\Models\Setting;
 
 #[Layout('components.layouts.app')]
 #[Title('Award Criteria — CenBa Africa Business Excellence Awards')]
@@ -12,6 +13,7 @@ class AwardCriteria extends Component
 {
     public array $criteria = [];
     public array $eligibility = [];
+    public ?string $heroImage = null;
 
     public function mount(): void
     {
@@ -28,10 +30,25 @@ class AwardCriteria extends Component
             ['title' => 'Nonprofits and NGOs', 'body' => 'Organisations making impactful contributions to their communities and industries.'],
             ['title' => 'Public and Private Sector Entities', 'body' => 'Institutions committed to excellence and innovation in their operations.'],
         ];
+
+        $this->heroImage = Setting::get('criteria_hero_image');
     }
 
     public function render()
-    {
-        return view('livewire.pages.award-criteria');
-    }
+{
+    $hash = '#';
+    $schema = '<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "' . route('award.criteria') . $hash . 'webpage",
+    "url": "' . route('award.criteria') . '",
+    "name": "Award Criteria — CenBa Africa Business Excellence Awards",
+    "isPartOf": { "@id": "' . url('/') . $hash . 'website" },
+    "inLanguage": "en"
+}
+</script>';
+
+    return view('livewire.pages.award-criteria')->with('schema', $schema);
+}
 }

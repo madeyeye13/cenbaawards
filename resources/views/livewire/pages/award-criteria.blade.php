@@ -3,7 +3,7 @@
 {{-- PAGE HERO --}}
 <section aria-label="Award Criteria hero" class="relative" style="padding-top: 70px; min-height: 420px;">
     <div class="absolute inset-0" style="top: 70px;">
-        <img src="{{ asset('images/criteria-hero.jpg') }}" alt="CenBa Award Criteria"
+        <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/criteria-hero.jpg') }}" alt="CenBa Award Criteria"
              class="w-full h-full object-cover" loading="eager" decoding="async">
     </div>
     <div class="absolute inset-0 bg-black/70" style="top: 70px;" aria-hidden="true"></div>
@@ -144,13 +144,13 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div class="p-8 bg-black/25 border border-white/10">
                 <p class="text-xs tracking-widest uppercase mb-3 text-white/50">Nominations Open</p>
-                <p class="text-white font-serif font-normal" style="font-size: 1.5rem;">25th September</p>
-                <p class="text-white/60">2025</p>
+                <p class="text-white font-serif font-normal" style="font-size: 1.5rem;">12th August</p>
+                <p class="text-white/60">2026</p>
             </div>
             <div class="p-8 bg-black/25 border border-white/10">
                 <p class="text-xs tracking-widest uppercase mb-3 text-white/50">Entries Close</p>
-                <p class="text-white font-serif font-normal" style="font-size: 1.5rem;">1st December</p>
-                <p class="text-white/60">2025</p>
+                <p class="text-white font-serif font-normal" style="font-size: 1.5rem;">6th November</p>
+                <p class="text-white/60">2026</p>
             </div>
         </div>
 
