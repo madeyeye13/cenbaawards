@@ -125,6 +125,15 @@
                 <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Winners</span>
             </a>
 
+            <a href="{{ route('admin.table-packages.index') }}" wire:navigate
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.table-packages.*') ? 'text-white' : 'text-white/60 hover:text-white hover:bg-white/10' }}"
+               style="{{ request()->routeIs('admin.table-packages.*') ? 'background: rgba(201,168,76,0.2);' : '' }}">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M3 6h18M3 14h18M3 18h18"/>
+                </svg>
+                <span x-show="sidebarOpen" class="text-sm font-medium whitespace-nowrap">Table Packages</span>
+            </a>
+
             {{-- Content --}}
             <div x-show="sidebarOpen" class="px-2 pt-4 mb-2">
                 <span class="text-xs font-semibold uppercase tracking-widest" style="color: rgba(255,255,255,0.35);">Content</span>

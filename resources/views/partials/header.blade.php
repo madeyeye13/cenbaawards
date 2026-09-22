@@ -1,17 +1,14 @@
-<header
-    x-data="{ scrolled: false, mobileOpen: false }"
-    x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 60)"
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-    :class="scrolled ? 'bg-[rgba(10,10,10,0.98)] backdrop-blur-md border-b border-gold/15' : 'bg-transparent'"
->
-    <div style="height: 70px;" class="flex items-center justify-between px-6 xl:px-16 gap-8 xl:gap-12">
+<header x-data="{ mobileOpen: false }" class="fixed top-0 left-0 right-0 z-50 bg-[#0D0D0D] border-b border-gold/15">
+    <div class="flex items-center justify-between px-6 xl:px-16 gap-8 xl:gap-12" style="height: 80px;">
 
         {{-- LOGO --}}
         <a href="{{ route('home') }}" wire:navigate class="flex items-center flex-shrink-0">
-            <img src="{{ asset('images/logo.png') }}" alt="CenBa Africa Business Excellence Awards" class="h-15 w-auto">
+            <img src="{{ asset('images/logo.png') }}"
+                 alt="CenBa Africa Business Excellence Awards"
+                 style="height: 60px; width: auto; display: block;">
         </a>
 
-        {{-- DESKTOP NAV (CENTERED) --}}
+        {{-- DESKTOP NAV --}}
         <nav class="hidden xl:flex items-center gap-1 flex-1 justify-center" aria-label="Main navigation">
 
             <a href="{{ route('home') }}" wire:navigate
@@ -139,7 +136,7 @@
 
         </nav>
 
-        {{-- CTA + Mobile --}}
+        {{-- CTA + Mobile Toggle --}}
         <div class="flex items-center gap-4 flex-shrink-0">
             <a href="https://forms.gle/iDMoH2Qb9oHKLqDTA"
                target="_blank"
@@ -149,6 +146,7 @@
                 Nominations
             </a>
 
+            {{-- Mobile hamburger button -- uses parent x-data mobileOpen --}}
             <button @click="mobileOpen = !mobileOpen"
                     class="xl:hidden p-1 text-white/80"
                     aria-label="Toggle mobile menu"
@@ -164,15 +162,16 @@
 
     </div>
 
-    {{-- MOBILE MENU --}}
-    <div x-cloak x-show="mobileOpen"
+    {{-- MOBILE MENU -- uses parent x-data mobileOpen --}}
+    <div x-cloak
+         x-show="mobileOpen"
          x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0 -translate-y-2"
          x-transition:enter-end="opacity-100 translate-y-0"
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
-         class="bg-[#0D0D0D] border-t border-gold/10"
+         class="bg-[#0D0D0D] border-t border-gold/10 xl:hidden"
          role="navigation"
          aria-label="Mobile navigation">
         <div class="px-8 py-6 space-y-1">
@@ -187,7 +186,9 @@
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3.5 text-xs font-semibold tracking-widest uppercase transition-colors text-white/75 border-b border-white/5">
                     Award
-                    <svg class="w-3 h-3 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-3 h-3 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
                 </button>
                 <div x-show="open" class="pl-6 pb-2 space-y-1 border-b border-white/5">
                     <a href="{{ route('award.categories') }}" wire:navigate @click="mobileOpen = false" class="block px-4 py-2 text-xs tracking-widest uppercase transition-colors text-white/45 hover:text-gold">Award Categories</a>
@@ -203,7 +204,9 @@
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3.5 text-xs font-semibold tracking-widest uppercase transition-colors text-white/75 border-b border-white/5">
                     Events
-                    <svg class="w-3 h-3 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-3 h-3 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
                 </button>
                 <div x-show="open" class="pl-6 pb-2 space-y-1 border-b border-white/5">
                     <a href="{{ route('events.partners') }}" wire:navigate @click="mobileOpen = false" class="block px-4 py-2 text-xs tracking-widest uppercase transition-colors text-white/45 hover:text-gold">Partners & Sponsors</a>
@@ -215,7 +218,9 @@
                 <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3.5 text-xs font-semibold tracking-widest uppercase transition-colors text-white/75 border-b border-white/5">
                     Winners
-                    <svg class="w-3 h-3 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-3 h-3 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
                 </button>
                 <div x-show="open" class="pl-6 pb-2 border-b border-white/5">
                     <a href="{{ route('winners') }}" wire:navigate @click="mobileOpen = false" class="block px-4 py-2 text-xs tracking-widest uppercase transition-colors text-white/45 hover:text-gold">Past Winners</a>

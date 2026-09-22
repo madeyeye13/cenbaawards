@@ -7,8 +7,8 @@
 <section
     id="hero"
     aria-label="CenBa Awards Hero"
-    class="relative w-full overflow-hidden mt-16"
-    style="height: 100vh; min-height: 640px;"
+    class="relative w-full overflow-hidden"
+    style="margin-top: 80px; height: calc(100vh - 80px); min-height: 560px;"
     x-data="{
         current: 0,
         slides: [
@@ -46,13 +46,13 @@
                     <span class="text-xs font-semibold tracking-[0.3em] uppercase text-gold">8th Edition · 2026</span>
                 </div>
 
-                <h1 class="font-serif text-white font-medium leading-tight mb-6" style="font-size: clamp(2.25rem, 6vw, 4.25rem);">
+                <h1 class="font-serif text-white font-medium leading-tight mb-6" style="font-size: clamp(1.5rem, 5vw, 4.25rem);">
                     Celebrating Africa's<br>
                     <em class="italic text-gold-light font-semibold">Finest</em> Brands &amp;<br>
                     Entrepreneurs
                 </h1>
 
-                <p class="mb-10 font-light leading-relaxed text-warm-white/75" style="font-size: clamp(1rem, 2vw, 1.125rem); max-width: 520px;">
+                <p class="mb-8 font-light leading-relaxed text-warm-white/75" style="font-size: clamp(0.875rem, 2vw, 1.125rem); max-width: 520px;">
                     Promoting African Innovations for Sustainable Growth — where excellence meets recognition across the continent.
                 </p>
 
@@ -97,7 +97,7 @@
                 $stats = [
                     ['number' => '8th', 'label' => 'Edition of the Awards'],
                     ['number' => '2016', 'label' => 'Year Established'],
-                    ['number' => '9+', 'label' => 'Award Categories'],
+                    ['number' => '15+', 'label' => 'Award Categories'],
                     ['number' => '5+', 'label' => 'Strategic Partners'],
                 ];
             @endphp
@@ -110,6 +110,7 @@
         </div>
     </div>
 </section>
+
 
 
 {{-- ============================================================
@@ -171,6 +172,80 @@
         </div>
     </div>
 </section>
+
+{{-- ============================================================
+     SECTION 1B: EDITION BANNER
+     ============================================================ --}}
+@if($editionBannerEnabled)
+<section aria-labelledby="edition-heading" class="bg-ink">
+    <div class="max-w-7xl mx-auto px-6 xl:px-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[480px]">
+
+            {{-- Left: Content --}}
+            <div class="flex flex-col justify-center py-16 lg:py-20 lg:pr-16">
+                <div class="flex items-center gap-3 mb-6" aria-hidden="true">
+                    <div class="w-8 h-px bg-gold"></div>
+                    <span class="text-gold text-[0.65rem] tracking-[0.3em] uppercase font-semibold">{{ $editionBannerSubtitle }}</span>
+                </div>
+
+                <h2 id="edition-heading" class="font-serif font-normal text-white leading-tight mb-8"
+                    style="font-size: clamp(1.75rem, 4vw, 3rem);">
+                    {{ $editionBannerTitle }}
+                </h2>
+
+                <div class="space-y-4 mb-10">
+                    <div class="flex items-start gap-5 p-5 bg-white/5 border-l-[3px] border-gold">
+                        <div>
+                            <p class="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-white/40 mb-1">Nominations Open</p>
+                            <p class="text-white font-semibold" style="font-size: 1.05rem;">{{ $editionNominationsOpen }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5 p-5 bg-white/5 border-l-[3px] border-crimson">
+                        <div>
+                            <p class="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-white/40 mb-1">Entries Close</p>
+                            <p class="text-white font-semibold" style="font-size: 1.05rem;">{{ $editionEntriesClose }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://forms.gle/iDMoH2Qb9oHKLqDTA" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 px-8 py-4 bg-gold text-ink font-semibold text-xs tracking-widest uppercase transition-all duration-200 hover:bg-gold-light">
+                        Nominate Now
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a href="{{ route('award.criteria') }}" wire:navigate
+                       class="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-200 hover:border-gold hover:text-gold">
+                        View Criteria
+                    </a>
+                </div>
+            </div>
+
+            {{-- Right: Image --}}
+            <div class="hidden lg:block relative overflow-hidden" style="min-height: 480px;">
+                @if($editionBannerImage)
+                    <img src="{{ asset('storage/' . $editionBannerImage) }}"
+                         alt="{{ $editionBannerTitle }}"
+                         class="w-full h-full object-cover"
+                         loading="lazy" decoding="async">
+                @else
+                    <div class="w-full h-full bg-crimson/20 flex items-center justify-center">
+                        <div class="text-center">
+                            <p class="font-serif font-normal text-white/20" style="font-size: 6rem; line-height: 1;">8</p>
+                            <p class="text-white/20 text-xs tracking-widest uppercase">Upload an image in Settings</p>
+                        </div>
+                    </div>
+                @endif
+                {{-- Overlay gradient --}}
+                <div class="absolute inset-0" style="background: linear-gradient(to right, #1a1a1a 0%, transparent 30%);"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+@endif
 
 
 {{-- ============================================================
@@ -313,8 +388,8 @@
             @php
                 $eventsList = [
                     ['date' => '12th November 2026', 'day' => 'Thursday', 'name' => 'CenBa Awards Launch', 'venue' => 'AGI Office, Kumasi', 'time' => '9:00 AM – 12:00 NOON', 'highlight' => false],
-                    ['date' => '26th November 2026', 'day' => 'Thursday', 'name' => 'Business Seminar — Promoting Africa Innovations for Sustainable Growth', 'venue' => 'Live Event Center, Kumasi Mall', 'time' => '9:00 AM – 12:00 PM', 'highlight' => false],
-                    ['date' => '28th November 2026', 'day' => 'Saturday', 'name' => 'CenBa Awards & Dinner Night', 'venue' => 'Golden Bean Hotel, Ahodwo Nhyiaeso, Kumasi', 'time' => '6:00 PM – 10:00 PM', 'highlight' => true],
+                    ['date' => '4th December 2026', 'day' => 'Friday', 'name' => 'Business Seminar — Promoting Africa Innovations for Sustainable Growth', 'venue' => 'Live Event Center, Kumasi Mall', 'time' => '8:00 AM – 12:00 PM', 'highlight' => false],
+                    ['date' => '5th December 2026', 'day' => 'Saturday', 'name' => 'CenBa Awards & Dinner Night', 'venue' => 'Golden Bean Hotel, Ahodwo Nhyiaeso, Kumasi', 'time' => '5:00 PM – 10:00 PM', 'highlight' => true],
                 ];
             @endphp
             @foreach($eventsList as $event)
@@ -350,6 +425,12 @@
 
     </div>
 </section>
+
+
+{{-- ============================================================
+     SECTION 6B: AWARD TABLE PACKAGES
+     ============================================================ --}}
+<livewire:award-table-packages />
 
 
 {{-- ============================================================

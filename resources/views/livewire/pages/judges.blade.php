@@ -14,7 +14,7 @@
                 <div class="w-0.5 h-5 bg-gold"></div>
                 <span class="text-gold text-[0.65rem] tracking-[0.3em] uppercase font-semibold">CenBa Africa Business Excellence Awards</span>
             </div>
-            <h1 class="font-serif font-normal text-white leading-tight" style="font-size: clamp(2.5rem, 6vw, 4.5rem); max-width: 700px;">
+            <h1 class="font-serif font-normal text-white leading-tight" style="font-size: clamp(1.75rem, 4vw, 3.5rem); max-width: 700px;">
                 Meet Our Judges
             </h1>
             <p class="mt-6 leading-relaxed text-white/75" style="max-width: 560px; font-size: 1rem;">
@@ -41,17 +41,17 @@
                 <div class="w-8 h-px bg-crimson"></div>
                 <span class="text-crimson text-[0.65rem] tracking-[0.3em] uppercase font-semibold">The Panel</span>
             </div>
-            <h2 id="judges-heading" class="font-serif font-normal leading-tight text-ink" style="font-size: clamp(2rem, 4vw, 3rem);">
+            <h2 id="judges-heading" class="font-serif font-normal leading-tight text-ink" style="font-size: clamp(1.5rem, 3vw, 2.25rem);">
                 Our Distinguished Judges
             </h2>
         </div>
 
         @if($judges->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($judges as $judge)
             <article class="group">
                 {{-- Photo --}}
-                <div class="relative overflow-hidden mb-6 bg-cream" style="aspect-ratio: 3/4;">
+                <div class="relative overflow-hidden mb-4 bg-cream" style="aspect-ratio: 1/1;">
                     @if($judge->photo)
                         <img src="{{ asset('storage/' . $judge->photo) }}"
                              alt="{{ $judge->name }} — {{ $judge->title }}"

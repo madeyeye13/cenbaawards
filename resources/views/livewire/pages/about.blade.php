@@ -3,7 +3,7 @@
 {{-- ============================================================
      PAGE HERO — Image with black overlay
      ============================================================ --}}
-<section aria-label="About page hero" class="relative" style="padding-top: 70px; min-height: 480px;">
+<section aria-label="About page hero" class="relative" style="padding-top: 80px; min-height: 480px;">
 
     <div class="absolute inset-0" style="top: 70px;">
         <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/about-hero.jpg') }}"
@@ -129,10 +129,13 @@
                 <div class="mt-10 space-y-4">
                     @php
                         $milestones = [
-                            ['year' => '2016', 'text' => 'CenBa Africa Business Excellence Award established'],
-                            ['year' => '2018', 'text' => 'Expanded award categories to reflect growing business landscape'],
-                            ['year' => '2021', 'text' => 'Partnership with E4Impact Foundation, Italy'],
-                            ['year' => '2024', 'text' => 'Award Trust Mark accreditation secured'],
+                            ['year' => '2016', 'text' => 'CenBa Africa Business Excellence Award established — 1st Edition held in Kumasi, Ghana'],
+                            ['year' => '2019', 'text' => '2nd Edition held — expanded recognition across key business sectors in Ghana'],
+                            ['year' => '2021', 'text' => '3rd Edition held — partnership with E4Impact Foundation, Italy formalized'],
+                            ['year' => '2022', 'text' => '4th Edition held — partnership with Wisconsin International University College secured'],
+                            ['year' => '2023', 'text' => '5th Edition held — partnership with Association of Ghana Industries (AGI) established'],
+                            ['year' => '2024', 'text' => '6th Edition held — Award Trust Mark accreditation secured from Independent Award Standard Council, UK'],
+                            ['year' => '2025', 'text' => '7th Edition held — partnership with Ministry of Trade, Agribusiness & Industry confirmed'],
                             ['year' => '2026', 'text' => '8th Edition — Promoting African Innovations for Sustainable Growth'],
                         ];
                     @endphp

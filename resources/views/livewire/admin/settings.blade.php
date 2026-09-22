@@ -14,7 +14,7 @@
 
     {{-- Tabs --}}
     <div class="flex items-center gap-1 mb-8 border-b border-gray-100 dark:border-neutral-800 overflow-x-auto pb-px">
-        @foreach(['home' => 'Home', 'about' => 'About', 'categories' => 'Categories', 'criteria' => 'Criteria', 'judges' => 'Judges', 'partners' => 'Partners', 'contact' => 'Contact', 'sitemap' => 'Sitemap'] as $key => $label)
+        @foreach(['home' => 'Home', 'about' => 'About', 'categories' => 'Categories', 'criteria' => 'Criteria', 'judges' => 'Judges', 'partners' => 'Partners', 'contact' => 'Contact', 'edition' => 'Edition Banner', 'sitemap' => 'Sitemap'] as $key => $label)
         <button wire:click="switchTab('{{ $key }}')"
                 class="px-4 py-2.5 text-sm font-semibold border-b-2 whitespace-nowrap transition-colors -mb-px
                        {{ $tab === $key ? 'border-red-800 text-red-800 dark:text-red-400' : 'border-transparent text-gray-500 dark:text-neutral-400' }}">
@@ -104,6 +104,79 @@
             <span wire:loading.remove wire:target="save">Save Changes</span>
             <span wire:loading wire:target="save">Saving...</span>
         </button>
+    </div>
+    @endif
+
+    {{-- EDITION BANNER TAB --}}
+    @if($tab === 'edition')
+    <div class="max-w-2xl space-y-8">
+
+        <div>
+            <h2 class="text-base font-bold text-gray-900 dark:text-white mb-1">Edition Banner Section</h2>
+            <p class="text-sm text-gray-500 dark:text-neutral-400 mb-6">
+                A split section on the homepage showing the current edition details alongside an image. Toggle it off to hide it from the public site.
+            </p>
+
+            {{-- Enable toggle --}}
+            <div class="flex items-center justify-between p-5 bg-white dark:bg-neutral-900 rounded-xl border border-gray-100 dark:border-neutral-800 mb-6">
+                <div>
+                    <p class="text-sm font-semibold text-gray-900 dark:text-white">Show on Homepage</p>
+                    <p class="text-xs text-gray-500 dark:text-neutral-400 mt-0.5">Toggle off to hide this section entirely from the public website.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" wire:model="edition_banner_enabled" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-neutral-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-800"></div>
+                </label>
+            </div>
+
+            {{-- Auto hide date --}}
+            <div class="mb-6">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">
+                    Auto-hide After Date
+                </label>
+                <input wire:model="edition_auto_hide_date" type="date"
+                    class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+                <p class="text-xs text-gray-400 mt-1">The section will automatically hide after this date, even if the toggle is on.</p>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-100 dark:border-neutral-800 pt-8 space-y-5">
+            <h3 class="text-sm font-bold text-gray-900 dark:text-white">Content</h3>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">Title</label>
+                <input wire:model="edition_banner_title" type="text" placeholder="e.g. CABEA 2026 — 8th Edition"
+                    class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">Subtitle / Tagline</label>
+                <input wire:model="edition_banner_subtitle" type="text" placeholder="e.g. Coming Soon"
+                    class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">Nominations Open</label>
+                    <input wire:model="edition_nominations_open" type="text" placeholder="e.g. 12th August, 2026"
+                        class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">Entries Close</label>
+                    <input wire:model="edition_entries_close" type="text" placeholder="e.g. 6th November, 2026"
+                        class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:border-red-500">
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-100 dark:border-neutral-800 pt-8">
+            <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-1">Section Image</h3>
+            <p class="text-xs text-gray-500 dark:text-neutral-400 mb-6">Shown on the right side of the section. Ideally a portrait or square photo.</p>
+            <div class="max-w-xs">
+                <x-admin.image-setting-card field="edition_banner_image" label="Section Image" :url="$edition_banner_image_url" />
+            </div>
+        </div>
+
     </div>
     @endif
 

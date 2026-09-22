@@ -9,7 +9,8 @@
     @livewireStyles
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
-
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
   
 @verbatim
 <script type="application/ld+json">

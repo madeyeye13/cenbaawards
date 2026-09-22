@@ -45,7 +45,7 @@ class About extends Component
             ],
             [
                 'question' => 'When will the winners be announced?',
-                'answer'   => 'Winners will be announced at the awards ceremony, typically held in November/December every year. The 2026 ceremony is scheduled for 28th November 2026 at Golden Bean Hotel, Kumasi.',
+                'answer'   => 'Winners will be announced at the awards ceremony, typically held in November/December every year. The 2026 ceremony is scheduled for 5th December 2026 at Golden Bean Hotel, Kumasi.',
             ],
             [
                 'question' => 'Is there a fee to enter the awards?',
@@ -122,7 +122,7 @@ class About extends Component
         {
             "@type": "Question",
             "name": "When will the winners be announced?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Winners will be announced at the awards ceremony scheduled for 28th November 2026 at Golden Bean Hotel, Kumasi." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Winners will be announced at the awards ceremony scheduled for 5th December 2026 at Golden Bean Hotel, Kumasi." }
         },
         {
             "@type": "Question",

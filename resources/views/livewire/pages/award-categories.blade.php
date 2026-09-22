@@ -1,7 +1,7 @@
 <div>
 
 {{-- PAGE HERO --}}
-<section aria-label="Award Categories hero" class="relative" style="padding-top: 70px; min-height: 420px;">
+<section aria-label="Award Categories hero" class="relative" style="padding-top: 80px; min-height: 420px;">
     <div class="absolute inset-0" style="top: 70px;">
         <img src="{{ $heroImage ? asset('storage/' . $heroImage) : asset('images/categories-hero.jpg') }}" alt="CenBa Award Categories"
              class="w-full h-full object-cover" loading="eager" decoding="async">

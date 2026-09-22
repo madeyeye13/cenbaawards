@@ -92,6 +92,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Winners
         Route::get('/winners', \App\Livewire\Admin\Winners::class)->name('winners.index');
 
+        // Award Table Packages
+        Route::get('/table-packages', \App\Livewire\Admin\TablePackages::class)->name('table-packages.index');
+
         // Gallery
         Route::get('/gallery', \App\Livewire\Admin\GalleryAlbums::class)->name('gallery.index');
         Route::get('/gallery/{slug}', \App\Livewire\Admin\GalleryAlbumImages::class)->name('gallery.album');

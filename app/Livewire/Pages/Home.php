@@ -9,6 +9,7 @@ use App\Models\Partner;
 use App\Models\Sponsor;
 use App\Models\Event;
 use App\Models\Setting;
+use Carbon\Carbon;
 
 #[Layout('components.layouts.app')]
 #[Title('CenBa Africa Business Excellence Awards — Celebrating Outstanding Achievement')]
@@ -18,6 +19,13 @@ class Home extends Component
     public $sponsors;
     public $events;
     public $latestPosts;
+
+    public bool $editionBannerEnabled = false;
+    public string $editionBannerTitle = '';
+    public string $editionBannerSubtitle = '';
+    public string $editionNominationsOpen = '';
+    public string $editionEntriesClose = '';
+    public ?string $editionBannerImage = null;
 
    public function mount(): void
     {
@@ -32,6 +40,22 @@ class Home extends Component
             ['path' => Setting::get('home_hero_slide_3'), 'fallback' => asset('images/hero/slide-3.jpg'), 'alt' => 'CenBa Africa Business Excellence Gala Night'],
         ];
         $this->homeAboutImage = Setting::get('home_about_image');
+
+
+        // Add to mount():
+        $this->editionBannerEnabled = (bool) Setting::get('edition_banner_enabled', false);
+        $this->editionBannerTitle = Setting::get('edition_banner_title', 'CABEA 2026 — 8th Edition');
+        $this->editionBannerSubtitle = Setting::get('edition_banner_subtitle', 'Coming Soon');
+        $this->editionNominationsOpen = Setting::get('edition_nominations_open', '12th August, 2026');
+        $this->editionEntriesClose = Setting::get('edition_entries_close', '6th November, 2026');
+        $this->editionBannerImage = Setting::get('edition_banner_image');
+
+        // Auto-hide logic
+        $autoHideDate = Setting::get('edition_auto_hide_date');
+        if ($autoHideDate && Carbon::parse($autoHideDate)->isPast()) {
+            $this->editionBannerEnabled = false;
+        }
+
     }
 
     public array $heroSlides = [];

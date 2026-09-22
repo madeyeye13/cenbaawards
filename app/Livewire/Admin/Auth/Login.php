@@ -31,7 +31,7 @@ class Login extends Component
         return;
     }
 
-    $this->redirect(route('admin.dashboard'), navigate: true);
+    $this->redirect(route('admin.dashboard'));
 }
 
     public function render()

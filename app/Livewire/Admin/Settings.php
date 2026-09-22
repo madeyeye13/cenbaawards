@@ -27,6 +27,16 @@ class Settings extends Component
     public ?string $home_about_image = null;
     public ?string $home_about_image_url = null;
 
+    // ── EDITION BANNER ─────────────────────────────────────────
+    public bool $edition_banner_enabled = false;
+    public ?string $edition_banner_image = null;
+    public ?string $edition_banner_image_url = null;
+    public string $edition_banner_title = '';
+    public string $edition_banner_subtitle = '';
+    public string $edition_nominations_open = '';
+    public string $edition_entries_close = '';
+    public ?string $edition_auto_hide_date = null;
+
     // ── ABOUT PAGE ─────────────────────────────────────────────
     public ?string $about_hero_image = null;
     public ?string $about_hero_image_url = null;
@@ -80,6 +90,16 @@ class Settings extends Component
             'judges_hero_image', 'partners_hero_image', 'contact_hero_image',
         ];
 
+        $this->edition_banner_enabled = (bool) Setting::get('edition_banner_enabled', false);
+        $this->edition_banner_title = Setting::get('edition_banner_title', 'CABEA 2026 — 8th Edition');
+        $this->edition_banner_subtitle = Setting::get('edition_banner_subtitle', 'Coming Soon');
+        $this->edition_nominations_open = Setting::get('edition_nominations_open', '12th August, 2026');
+        $this->edition_entries_close = Setting::get('edition_entries_close', '6th November, 2026');
+        $this->edition_auto_hide_date = Setting::get('edition_auto_hide_date', '2026-11-06');
+        $editionImg = Setting::get('edition_banner_image');
+        $this->edition_banner_image = $editionImg;
+        $this->edition_banner_image_url = $editionImg ? asset('storage/' . $editionImg) : null;
+
         foreach ($keys as $key) {
             $value = Setting::get($key);
             $this->{$key} = $value;
@@ -127,18 +147,28 @@ class Settings extends Component
             'judges'     => ['judges_hero_image'],
             'partners'   => ['partners_hero_image'],
             'contact'    => ['contact_hero_image'],
-            default      => [],
+            'edition'    => [
+                'edition_banner_enabled', 'edition_banner_title', 'edition_banner_subtitle',
+                'edition_nominations_open', 'edition_entries_close',
+                'edition_auto_hide_date', 'edition_banner_image',
+            ],
+            default => [],
         };
 
         $group = 'page_images';
         foreach ($fields as $field) {
-            Setting::set($field, $this->{$field}, $group);
+            $value = $this->{$field};
+            // Cast boolean to string for storage
+            if (is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
+            Setting::set($field, $value, $group);
         }
         Setting::clearGroup($group);
 
-        $this->dispatch('toast', type: 'success', title: 'Saved', message: 'Page images updated.');
+        $this->dispatch('toast', type: 'success', title: 'Saved', message: 'Settings updated.');
     }
-
+    
     protected function checkSitemap(): void
     {
         $path = public_path('sitemap.xml');

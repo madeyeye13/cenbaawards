@@ -135,7 +135,7 @@
                 <div class="w-8 h-px bg-gold"></div>
                 <span class="text-gold text-[0.65rem] tracking-[0.3em] uppercase font-semibold">Important Dates</span>
             </div>
-            <h2 id="dates-heading" class="font-serif font-normal text-white leading-tight" style="font-size: clamp(2rem, 4vw, 3rem);">
+            <h2 id="dates-heading" class="font-serif font-normal text-white leading-tight" style="font-size: clamp(1.5rem, 3vw, 2.25rem);">
                 Key Dates &amp; 2026 Programme
             </h2>
         </div>
@@ -158,9 +158,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             @php
                 $events2026 = [
-                    ['date' => '12th November 2026', 'name' => 'CenBa Awards Launch', 'venue' => 'AGI Office, Kumasi', 'time' => '9:00 AM – 12:00 NOON'],
-                    ['date' => '26th November 2026', 'name' => 'Business Seminar', 'venue' => 'Live Event Center, Kumasi Mall', 'time' => '9:00 AM – 12:00 PM'],
-                    ['date' => '28th November 2026', 'name' => 'Awards & Dinner Night', 'venue' => 'Golden Bean Hotel, Ahodwo Nhyiaeso, Kumasi', 'time' => '6:00 PM – 10:00 PM'],
+                    ['date' => '12th August 2026', 'name' => 'CenBa Awards Launch', 'venue' => 'AGI Office, Kumasi', 'time' => '9:00 AM – 12:00 NOON'],
+                    ['date' => '4th December 2026', 'name' => 'Business Seminar', 'venue' => 'Live Event Center, Kumasi Mall', 'time' => '8:00 AM – 12:00 PM'],
+                    ['date' => '5th December 2026', 'name' => 'Awards & Dinner Night', 'venue' => 'Golden Bean Hotel, Ahodwo Nhyiaeso, Kumasi', 'time' => '5:00 PM – 10:00 PM'],
                 ];
             @endphp
             @foreach($events2026 as $event)
@@ -197,5 +197,16 @@
 
     </div>
 </section>
+
+
+{{-- AWARD TABLE PACKAGES — required for accreditation --}}
+<section class="bg-white">
+    <div class="max-w-screen-2xl mx-auto px-6 xl:px-20 pt-20">
+        <p class="text-center text-sm text-[#666666]">
+            Accreditation for the CenBa Awards &amp; Dinner Night requires securing one of the table packages below.
+        </p>
+    </div>
+</section>
+<livewire:award-table-packages />
 
 </div>
